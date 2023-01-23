@@ -1,0 +1,131 @@
+<div class="container-fluid mb-6">
+    <div class="row">
+        <div class="col-sm-12">
+            <app-header></app-header>
+        </div>
+
+        <div class="col-sm-12">
+            <div class="row column-list-container" cdkDropListGroup>
+                <div class="col-lg-3 col-md-3 col-sm-6 column-list">
+                  <h2>Sin Fecha Asignada</h2>
+                  <div
+                    cdkDropList
+                    [cdkDropListData]="sinAsignar"
+                    (cdkDropListDropped)="drop($event)">
+                    <div class="list-box" *ngFor="let item of sinAsignar" cdkDrag>
+                        <mat-card class="card-item">
+                            <mat-card-header>
+                            <div class="icon" [ngStyle]="{'background-color':item.type === 'ACTIVITY' ? '#50BFB4' : item.type === 'FOOD' ? '#BF5A50' : '#9959D9' }">
+                                <mat-icon aria-hidden="false" aria-label="Example hiking icon" fontIcon='hiking' *ngIf="item.type === 'ACTIVITY'"> </mat-icon>
+                                <mat-icon aria-hidden="false" aria-label="Example hiking icon" fontIcon='restaurant_menu' *ngIf="item.type === 'FOOD'"> </mat-icon>
+                                <mat-icon aria-hidden="false" aria-label="Example hiking icon" fontIcon='celebration' *ngIf="item.type === 'PARTY'"> </mat-icon>
+                            </div>
+                              <mat-card-title-group class="card-item-title">
+                                <mat-card-title>{{item.title}}</mat-card-title>
+                                <mat-card-subtitle>{{item.startDate}}</mat-card-subtitle>
+                              </mat-card-title-group>
+                            </mat-card-header>
+                            <mat-card-content>
+                            </mat-card-content>
+                          </mat-card>                    
+                    </div>
+                  </div>
+                </div>
+              
+                <div class="col-lg-3 col-md-3 col-sm-6 column-list">
+                  <h2>23 de Enero </h2>
+              
+                  <div
+                    cdkDropList
+                    [cdkDropListData]="dia_1"
+                    (cdkDropListDropped)="drop($event)">
+                    <div class="list-box" *ngFor="let item of dia_1" cdkDrag>
+                        <mat-card class="card-item">
+                            <mat-card-header>
+                                <div class="icon" [ngStyle]="{'background-color':item.type === 'ACTIVITY' ? '#50BFB4' : item.type === 'FOOD' ? '#BF5A50' : '#9959D9' }">
+                                    <mat-icon aria-hidden="false" aria-label="Example hiking icon" fontIcon='hiking' *ngIf="item.type === 'ACTIVITY'"> </mat-icon>
+                                    <mat-icon aria-hidden="false" aria-label="Example hiking icon" fontIcon='restaurant_menu' *ngIf="item.type === 'FOOD'"> </mat-icon>
+                                    <mat-icon aria-hidden="false" aria-label="Example hiking icon" fontIcon='celebration' *ngIf="item.type === 'PARTY'"> </mat-icon>
+                                </div>
+                                <mat-card-title-group class="card-item-title">
+                                    <mat-card-title>{{item.title}}</mat-card-title>
+                                    <mat-card-subtitle>{{item.startDate}}</mat-card-subtitle>
+                                </mat-card-title-group>
+                            </mat-card-header>
+                            <mat-card-content>
+                            </mat-card-content>
+                          </mat-card>     
+                    </div>
+                  </div>
+                </div>
+
+                <div class="col-lg-3 col-md-3 col-sm-6 column-list">
+                  <h2>24 de Enero </h2>
+              
+                  <div
+                    cdkDropList
+                    [cdkDropListData]="dia_2"
+                    (cdkDropListDropped)="drop($event)">
+                    <div class="list-box" *ngFor="let item of dia_2" cdkDrag>
+                        <mat-card class="card-item">
+                            <mat-card-header>
+                                <div class="icon" [ngStyle]="{'background-color':item.type === 'ACTIVITY' ? '#50BFB4' : item.type === 'FOOD' ? '#BF5A50' : '#9959D9' }">
+                                    <mat-icon aria-hidden="false" aria-label="Example hiking icon" fontIcon='hiking' *ngIf="item.type === 'ACTIVITY'"> </mat-icon>
+                                    <mat-icon aria-hidden="false" aria-label="Example hiking icon" fontIcon='restaurant_menu' *ngIf="item.type === 'FOOD'"> </mat-icon>
+                                    <mat-icon aria-hidden="false" aria-label="Example hiking icon" fontIcon='celebration' *ngIf="item.type === 'PARTY'"> </mat-icon>
+                                </div>
+                                <mat-card-title-group class="card-item-title">
+                                    <mat-card-title>{{item.title}}</mat-card-title>
+                                    <mat-card-subtitle>{{item.startDate}}</mat-card-subtitle>
+                                </mat-card-title-group>
+                            </mat-card-header>
+                            <mat-card-content>
+                            </mat-card-content>
+                          </mat-card>     
+                    </div>
+                  </div>
+                </div>
+
+                <div class="col-lg-3 col-md-3 col-sm-6 column-list">
+                    <h2>25 de Enero </h2>
+                
+                    <div
+                      cdkDropList
+                      [cdkDropListData]="dia_3"
+                      (cdkDropListDropped)="drop($event)">
+                      <div class="list-box" *ngFor="let item of dia_3" cdkDrag>
+                        <mat-card class="card-item">
+                            <mat-card-header>
+                                 <div class="icon" [ngStyle]="{'background-color':item.type === 'ACTIVITY' ? '#50BFB4' : item.type === 'FOOD' ? '#BF5A50' : '#9959D9' }">
+                                    <mat-icon aria-hidden="false" aria-label="Example hiking icon" fontIcon='hiking' *ngIf="item.type === 'ACTIVITY'"> </mat-icon>
+                                    <mat-icon aria-hidden="false" aria-label="Example hiking icon" fontIcon='restaurant_menu' *ngIf="item.type === 'FOOD'"> </mat-icon>
+                                    <mat-icon aria-hidden="false" aria-label="Example hiking icon" fontIcon='celebration' *ngIf="item.type === 'PARTY'"> </mat-icon>
+                                </div>
+                                <mat-card-title-group class="card-item-title">
+                                    <mat-card-title>{{item.title}}</mat-card-title>
+                                    <mat-card-subtitle>{{item.startDate}}</mat-card-subtitle>
+                                </mat-card-title-group>
+                            </mat-card-header>
+                            <mat-card-content>
+                            </mat-card-content>
+                          </mat-card>     
+                      </div>
+                      <div class="list-box" *ngIf="dia_3.length === 0" cdkDrag>
+                        <mat-card class="card-item">
+                            <mat-card-header>
+                                <mat-card-title-group class="card-item-title">
+                                    <mat-card-subtitle>Agrege una actividad</mat-card-subtitle>
+                                </mat-card-title-group>
+                            </mat-card-header>
+                            <mat-card-content>
+                            </mat-card-content>
+                          </mat-card>     
+                      </div>
+                      
+                    </div>
+                  </div>
+                  
+              </div>
+        </div>
+    </div>
+</div>

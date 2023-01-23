@@ -1,0 +1,30 @@
+.header{
+    background-color: #F2F2F2;
+    box-shadow: 0px 1px 1px rgba(0, 0, 0, 0.3);    
+    .title-container{
+        display: flex;
+        align-items: start;
+        padding: 40px 40px;
+        // @media(max-width: 767px){
+        //     padding: 20px 5px 5px;
+        // }
+        // @include telefono{
+        //     padding: 10px 5px 5px;
+        // }
+        .title{
+            padding-top: 5px;
+            width: 100%;
+            flex: 1 0;
+            // @include telefono{
+            //     .btn-sm{
+            //         padding: 0.2rem 0.3rem;
+            //     }
+            // }
+        }
+        button {
+            background-color: #2E56A6;
+            color: #eee;
+            margin-right: 8em;
+        }
+    }
+}
