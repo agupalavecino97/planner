@@ -1,0 +1,38 @@
+<div class="row column-list-container" cdkDropListGroup>
+    <div class="col-lg-3 col-md-3 col-sm-6 column-list" *ngFor="let element of list">
+      <h2>{{element.nombre}}</h2>
+      <div
+        cdkDropList
+        [cdkDropListData]="element.activities"
+        (cdkDropListDropped)="drop($event)">
+        <div class="list-box" *ngFor="let item of element.activities" cdkDrag>
+            <mat-card class="card-item">
+                <mat-card-header>
+                <div class="icon" [ngStyle]="{'background-color':item.type === 'ACTIVITY' ? '#50BFB4' : item.type === 'FOOD' ? '#BF5A50' : '#9959D9' }">
+                    <mat-icon aria-hidden="false" aria-label="Example hiking icon" fontIcon='hiking' *ngIf="item.type === 'ACTIVITY'"> </mat-icon>
+                    <mat-icon aria-hidden="false" aria-label="Example hiking icon" fontIcon='restaurant_menu' *ngIf="item.type === 'FOOD'"> </mat-icon>
+                    <mat-icon aria-hidden="false" aria-label="Example hiking icon" fontIcon='celebration' *ngIf="item.type === 'PARTY'"> </mat-icon>
+                </div>
+                  <mat-card-title-group class="card-item-title">
+                    <mat-card-title>{{item.title}}</mat-card-title>
+                    <mat-card-subtitle>{{item.startDate}}</mat-card-subtitle>
+                  </mat-card-title-group>
+                </mat-card-header>
+                <mat-card-content>
+                </mat-card-content>
+              </mat-card>                  
+        </div>
+        <div class="list-box" *ngIf="element.activities.length === 0" cdkDrag>
+            <mat-card class="card-item">
+                <mat-card-header>
+                    <mat-card-title-group class="card-item-title">
+                        <mat-card-subtitle>Agrege una actividad</mat-card-subtitle>
+                    </mat-card-title-group>
+                </mat-card-header>
+                <mat-card-content>
+                </mat-card-content>
+              </mat-card>     
+          </div>  
+      </div>
+    </div>
+</div>

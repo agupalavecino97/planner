@@ -1,0 +1,32 @@
+<h1 mat-dialog-title class="modal-title">  <mat-icon aria-hidden="false" fontIcon='arrow_forward_ios'> </mat-icon>  Agregar una actividad</h1>
+<div mat-dialog-content>
+    <mat-grid-list cols="2" rowHeight="100px">
+        <mat-grid-tile [colspan]=2 [rowspan]=1>
+            <mat-form-field appearance="outline" floatLabel="always" class="full-width">
+                <mat-label>Nombre de la Actividad</mat-label>
+                <input matInput placeholder="Buscá una actividad o crea una nueva...">
+              </mat-form-field>
+        </mat-grid-tile>
+        <mat-grid-tile [colspan]=1 [rowspan]=1>
+            <mat-form-field appearance="outline" floatLabel="always" class="full-width"> 
+                <mat-label>Fecha de inicio </mat-label>
+                <input matInput [matDatepicker]="fechaInicio">
+                <mat-datepicker-toggle matIconSuffix [for]="fechaInicio"></mat-datepicker-toggle>
+                <mat-datepicker #fechaInicio></mat-datepicker>
+              </mat-form-field>
+        </mat-grid-tile>
+        <mat-grid-tile [colspan]=1 [rowspan]=1>
+            <mat-form-field appearance="outline" floatLabel="always" class="full-width">
+                <mat-label>Fecha de Fin </mat-label>
+                <input matInput [matDatepicker]="fechaFin">
+                <mat-datepicker-toggle matIconSuffix [for]="fechaFin"></mat-datepicker-toggle>
+                <mat-datepicker #fechaFin></mat-datepicker>
+              </mat-form-field>
+        </mat-grid-tile>
+    </mat-grid-list> 
+  
+</div>
+<div mat-dialog-actions class="buttons">
+  <button mat-button (click)="onNoClick()" class="btn-cancelar">Cancelar</button>
+  <button mat-button [mat-dialog-close]="data" cdkFocusInitial class="btn-agregar">Agregar</button>
+</div>

@@ -1,0 +1,36 @@
+.modal-title{
+    background-color: #2E56A6;
+    color: #eee;
+    display: flex;
+    align-content: center;
+    align-items: center;
+    padding: 1em;
+    mat-icon {
+        margin-right: 1em;
+    }
+}
+
+.full-width {
+    width: 100%;
+}
+
+.btn-cancelar{
+    opacity: 0.5;
+}
+
+.btn-agregar {
+    color: #eee;
+    background-color:#2E56A6;
+    border-color:#2E56A6;
+}
+
+.buttons {
+    position: absolute;
+    bottom: 1em;
+    right: 1em;
+    button {
+        font-size: 1.2em;
+        width: 6em;
+        height: 2em;
+    }
+}
