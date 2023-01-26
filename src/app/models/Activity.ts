@@ -1,20 +1,28 @@
 export class Activity {
-    activityId!: number;
-    title!: string;
-    type!: string;
+    activityId?: number;
+    title?: string;
+    type?: string;
     startDate?: string | null;
     endDate?: string | null;
     status?: string | null;
+    startHour?: string | null;
+    endHour?: string | null;
+    editable?: boolean = false;
+    sDate?: Date | null;
+    eDate?: Date | null;
 
     static parseItem(raw: any): Activity {
-        const banda = new Activity();
-        banda.activityId = raw.activityId ? raw.activityId : undefined;
-        banda.title = raw.title ? raw.title : undefined;
-        banda.type = raw.type ? raw.type: undefined;
-        banda.startDate = raw.startDate ? raw.startDate : null;
-        banda.endDate = raw.endDate ? raw.endDate : null;
-        banda.status = raw.status ? raw.status : null;
-        return banda;
+        const actividad = new Activity();
+        actividad.activityId = raw.activityId ? raw.activityId : null;
+        actividad.title = raw.title ? raw.title : null;
+        actividad.type = raw.type ? raw.type: null;
+        actividad.startDate = raw.startDate ? raw.startDate : null;
+        actividad.endDate = raw.endDate ? raw.endDate : null;
+        actividad.status = raw.status ? raw.status : null;
+        actividad.startHour = raw.startHour ? raw.startHour : null;
+        actividad.endHour = raw.endHour ? raw.endHour : null;
+        actividad.editable = raw.editable ? raw.editable : false;
+        return actividad;
     }
 
     

@@ -116,3 +116,11 @@
   margin-left: 5%;
   opacity: 0.5;
 }
+
+.edit-buttons {
+  position: absolute;
+  top: 5px;
+  right: 5px;
+  display: flex;
+  flex-direction: column;
+}

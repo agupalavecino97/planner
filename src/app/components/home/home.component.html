@@ -1,7 +1,7 @@
-<div class="container-fluid mb-6" style="background-color: #F2F2F2;">
+<div class="container-fluid mb-6" style="background-color: #F2F2F2; height: 100%;">
     <div class="row">
         <div class="col-sm-12">
-            <app-header></app-header>
+            <app-header (onEmitAgregar)="openFormAcrtivity()"></app-header>
         </div>
 
         <div class="col-sm-12">
@@ -16,7 +16,7 @@
                 [cdkDropListData]="element.activities"
                 (cdkDropListDropped)="drop($event)">
                 <div class="list-box" *ngFor="let item of element.activities" cdkDrag>
-                    <mat-card class="card-item">
+                    <mat-card class="card-item" (click)="item.editable = !item.editable" [ngStyle]="{'cursor': item.editable ? 'pointer' : 'move' }">
                         <mat-card-header>
                         <div class="icon" [ngStyle]="{'background-color':item.type === 'ACTIVITY' ? '#50BFB4' : item.type === 'FOOD' ? '#BF5A50' : '#9959D9' }">
                             <mat-icon aria-hidden="false" aria-label="Example hiking icon" fontIcon='hiking' *ngIf="item.type === 'ACTIVITY'"> </mat-icon>
@@ -25,8 +25,12 @@
                         </div>
                           <mat-card-title-group class="card-item-title">
                             <mat-card-title>{{item.title}}</mat-card-title>
-                            <mat-card-subtitle>{{item.startDate}}</mat-card-subtitle>
+                            <mat-card-subtitle *ngIf="item.startDate && item.endDate">{{ formatearFecha(item.startDate) +' - '+ formatearFecha(item.endDate)}}</mat-card-subtitle>
                           </mat-card-title-group>
+                          <div *ngIf="item.editable" class="edit-buttons">
+                            <button mat-button (click)="onClickEditActivity(item)">  <mat-icon style="font-size: 20px" matChipAvatar class="mr-2" aria-hidden="false" fontIcon='more_vert'> </mat-icon> </button>
+                            <button mat-button (click)="onClickEditActivity(item)">  <mat-icon style="font-size: 20px" matChipAvatar class="mr-2" aria-hidden="false" fontIcon='edit'> </mat-icon> </button>
+                          </div>
                         </mat-card-header>
                         <mat-card-content class="card-content">
                           <mat-chip *ngIf="item.status !== null" [ngClass]="{'progressChip': item.status === 'IN_PROGRESS', 'doneChip': item.status === 'DONE'}">
@@ -35,6 +39,7 @@
                                 {{item.status === 'IN_PROGRESS' ? 'En progreso' : 'Realizada'}}                                
                               </span> 
                           </mat-chip>
+                         
                         </mat-card-content>
                       </mat-card>                  
                 </div>

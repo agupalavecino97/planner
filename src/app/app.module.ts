@@ -4,6 +4,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { FormsModule } from '@angular/forms';
 
 // components
 import { HomeComponent } from './components/home/home.component';
@@ -25,6 +26,14 @@ import {MatDatepickerModule} from '@angular/material/datepicker';
 import {MatNativeDateModule} from '@angular/material/core';
 import {MatInputModule} from '@angular/material/input';
 import {MatGridListModule} from '@angular/material/grid-list';
+import {MatSelectModule} from '@angular/material/select';
+import { MomentDateModule } from '@angular/material-moment-adapter';
+import {MatButtonToggleModule} from '@angular/material/button-toggle';
+
+
+import { MAT_DATE_FORMATS } from '@angular/material/core';
+
+import { MY_DATE_FORMATS } from './date-format';
 
 @NgModule({
   declarations: [
@@ -40,6 +49,7 @@ import {MatGridListModule} from '@angular/material/grid-list';
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
+    FormsModule,
     MatSidenavModule,
     MatButtonModule,
     MatIconModule,
@@ -51,12 +61,15 @@ import {MatGridListModule} from '@angular/material/grid-list';
     MatDatepickerModule,
     MatNativeDateModule,
     MatInputModule,
-    MatGridListModule
+    MatGridListModule,
+    MatSelectModule,
+    MomentDateModule,
+    MatButtonToggleModule
   ],
   exports: [
     ActivityListComponent
   ],
-  providers: [MatDatepickerModule, MatNativeDateModule],
+  providers: [MatDatepickerModule, MatNativeDateModule, { provide: MAT_DATE_FORMATS, useValue: MY_DATE_FORMATS }],
   bootstrap: [AppComponent],
   schemas: [ CUSTOM_ELEMENTS_SCHEMA ]
 })
