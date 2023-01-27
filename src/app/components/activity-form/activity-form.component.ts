@@ -9,11 +9,17 @@ import { Activity } from '../../models/Activity';
 })
 export class ActivityFormComponent {
 
+  minDate: Date = new Date();
+  maxDate: Date = new Date();
+
+ 
   constructor(
     public dialogRef: MatDialogRef<ActivityFormComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: Activity,
+    @Inject(MAT_DIALOG_DATA) public data: any,
   ) {
-    console.log(data);
+    this.minDate.setDate(data.firstDate.getDate())
+    this.maxDate.setDate(data.firstDate.getDate() + 2)
+
   }
 
 
@@ -22,7 +28,7 @@ export class ActivityFormComponent {
   }
 
   onDateChange(type: number, event: any) {
-    type === 1 ? this.data.startDate = event.value : this.data.endDate = event.value 
+    type === 1 ? this.data.activity.startDate = event.value : this.data.activity.endDate = event.value 
   }
 
   onNoClick(): void {

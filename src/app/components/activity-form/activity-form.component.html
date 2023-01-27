@@ -4,13 +4,13 @@
         <mat-grid-tile [colspan]=1 [rowspan]=1>
             <mat-form-field appearance="outline" floatLabel="always" class="full-width">
                 <mat-label>Nombre de la Actividad</mat-label>
-                <input matInput placeholder="Buscá una actividad o crea una nueva..." name="title" type="text" [(ngModel)]="data.title">
+                <input matInput placeholder="Buscá una actividad o crea una nueva..." name="title" type="text" [(ngModel)]="data.activity.title">
               </mat-form-field>
         </mat-grid-tile>
         <mat-grid-tile [colspan]=1 [rowspan]=1>
           <mat-form-field appearance="outline" class="full-width">
             <mat-label>Tipo</mat-label>
-            <mat-select [(ngModel)]="data.type">
+            <mat-select [(ngModel)]="data.activity.type">
               <mat-option value="ACTIVITY">Actividad</mat-option>
               <mat-option value="PARTY">Fiesta</mat-option>
               <mat-option value="FOOD">Comida</mat-option>
@@ -18,18 +18,18 @@
           </mat-form-field>  
         </mat-grid-tile>
        
-        <mat-grid-tile [colspan]=1 [rowspan]=1 *ngIf="!data.activityId || data.activityId === null">
+        <mat-grid-tile [colspan]=1 [rowspan]=1 *ngIf="!data.activity.activityId || data.activity.activityId === null">
           <mat-form-field appearance="outline" floatLabel="always" class="full-width" disabled> 
               <mat-label>Fecha de inicio </mat-label>
-              <input matInput [matDatepicker]="fechaInicio" (dateChange)="onDateChange(1, $event)" [(ngModel)]="data.startDate" >
+              <input matInput [matDatepicker]="fechaInicio" (dateChange)="onDateChange(1, $event)" [(ngModel)]="data.activity.startDate" [min]="minDate" [max]="maxDate">
               <mat-datepicker-toggle matIconSuffix [for]="fechaInicio"></mat-datepicker-toggle>
               <mat-datepicker #fechaInicio></mat-datepicker>
             </mat-form-field>
         </mat-grid-tile>
-        <mat-grid-tile [colspan]=1 [rowspan]=1 *ngIf="!data.activityId || data.activityId === null">
-          <mat-form-field appearance="outline" floatLabel="always" class="full-width" [(ngModel)]="data.endDate" disabled>
+        <mat-grid-tile [colspan]=1 [rowspan]=1 *ngIf="!data.activity.activityId || data.activity.activityId === null">
+          <mat-form-field appearance="outline" floatLabel="always" class="full-width" [(ngModel)]="data.activity.endDate" disabled>
               <mat-label>Fecha de Fin </mat-label>
-              <input matInput [matDatepicker]="fechaFin" (dateChange)="onDateChange(2, $event)">
+              <input matInput [matDatepicker]="fechaFin" (dateChange)="onDateChange(2, $event)" [min]="minDate" [max]="maxDate">
               <mat-datepicker-toggle matIconSuffix [for]="fechaFin"></mat-datepicker-toggle>
               <mat-datepicker #fechaFin></mat-datepicker>
             </mat-form-field>
@@ -38,19 +38,19 @@
       <mat-grid-tile [colspan]=1 [rowspan]=1>
         <mat-form-field appearance="outline" class="full-width"> 
             <mat-label>Hora de inicio </mat-label>
-            <input matInput type="time" [(ngModel)]="data.startHour">
+            <input matInput type="time" [(ngModel)]="data.activity.startHour">
           </mat-form-field>
     </mat-grid-tile>
     <mat-grid-tile [colspan]=1 [rowspan]=1>
           <mat-form-field appearance="outline" class="full-width">
             <mat-label>Hora de fin</mat-label>
-            <input matInput type="time" [(ngModel)]="data.endHour">
+            <input matInput type="time" [(ngModel)]="data.activity.endHour">
           </mat-form-field>
     </mat-grid-tile>
-    <mat-grid-tile [colspan]=1 [rowspan]=1 *ngIf="data.activityId && data.activityId !== null">
+    <mat-grid-tile [colspan]=1 [rowspan]=1 *ngIf="data.activity.activityId && data.activity.activityId !== null">
       <mat-form-field appearance="outline" class="full-width">
         <mat-label>Estado</mat-label>
-        <mat-select [(ngModel)]="data.status">
+        <mat-select [(ngModel)]="data.activity.status">
           <mat-option value="IN_PROGRESS">En progreso</mat-option>
           <mat-option value="DONE">Realizada</mat-option>
         </mat-select>
@@ -61,5 +61,5 @@
 </div>
 <div mat-dialog-actions class="buttons">
   <button mat-button (click)="onNoClick()" class="btn-cancelar">Cancelar</button>
-  <button mat-button [mat-dialog-close]="data" cdkFocusInitial class="btn-agregar" [disabled]="data.title === '' || data.startDate === '' || data.endDate === ''">Agregar</button>
+  <button mat-button [mat-dialog-close]="data.activity" cdkFocusInitial class="btn-agregar" [disabled]="data.activity.title === '' || data.activity.startDate === null || data.activity.endDate === null">Agregar</button>
 </div>

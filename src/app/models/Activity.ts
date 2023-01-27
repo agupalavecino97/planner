@@ -1,35 +1,61 @@
 export class Activity {
-    activityId?: number;
+    activityId!: number;
     title?: string;
     type?: string;
-    startDate?: string | null;
-    endDate?: string | null;
+    startDate?: Date | null;
+    endDate?: Date | null;
     status?: string | null;
     startHour?: string | null;
     endHour?: string | null;
     editable?: boolean = false;
-    sDate?: Date | null;
-    eDate?: Date | null;
+   
 
-    static parseItem(raw: any): Activity {
-        const actividad = new Activity();
-        actividad.activityId = raw.activityId ? raw.activityId : null;
-        actividad.title = raw.title ? raw.title : null;
-        actividad.type = raw.type ? raw.type: null;
-        actividad.startDate = raw.startDate ? raw.startDate : null;
-        actividad.endDate = raw.endDate ? raw.endDate : null;
-        actividad.status = raw.status ? raw.status : null;
-        actividad.startHour = raw.startHour ? raw.startHour : null;
-        actividad.endHour = raw.endHour ? raw.endHour : null;
-        actividad.editable = raw.editable ? raw.editable : false;
-        return actividad;
+    static parseItemDB(raw: any): Activity {
+        const activity = new Activity();
+        activity.activityId = raw.activityId ? raw.activityId : null;
+        activity.title = raw.title ? raw.title : null;
+        activity.type = raw.type ? raw.type: null;
+        if (raw.startDate) {
+            let d = raw.startDate.split(' ');
+            activity.startHour = d[1].substring(0, d[1].length - 3);
+            let new_date = d[0].split('-');
+            activity.startDate = new Date(new_date[0], new_date[1] - 1, new_date[2])
+        } else {
+            activity.startHour = null;
+            activity.startHour = null;
+        }
+        if (raw.endDate) {
+            let d = raw.endDate.split(' ');
+            activity.endHour = d[1].substring(0, d[1].length - 3);
+            let new_date = d[0].split('-');
+            activity.endDate = new Date(new_date[0], new_date[1] - 1, new_date[2])
+        } else {
+            activity.endDate = null;
+            activity.endHour = null;
+        }
+        activity.status = raw.status ? raw.status : null;
+        activity.editable = raw.editable ? raw.editable : false;
+        return activity;
     }
 
+    static parseItem(raw: any): Activity {
+        const activity = new Activity();
+        activity.activityId = raw.activityId ? raw.activityId : null;
+        activity.title = raw.title ? raw.title : null;
+        activity.type = raw.type ? raw.type: null;
+        activity.startHour = raw.startHour ? raw.startHour : null
+        activity.startDate = raw.startDate ? raw.startDate : null
+        activity.endDate = raw.endDate ? raw.endDate : null
+        activity.endHour = raw.endHour ? raw.endHour : null 
+        activity.status = raw.status ? raw.status : null;
+        activity.editable = raw.editable ? raw.editable : false;
+        return activity;
+    }
     
-    static parseArray(raws: any): Activity[] {
+    static parseArray(raws: Array<any>): Activity[] {
         if (!raws || !raws.length) {
             return [];
         }
-        return raws.map((raw: any) => Activity.parseItem(raw));
+        return raws.map((raw: any) => Activity.parseItemDB(raw));
     }
 }

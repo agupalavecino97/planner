@@ -6,9 +6,9 @@
 
         <div class="col-sm-12">
           <div class="row column-list-container" cdkDropListGroup>
-            <div class="col-lg-3 col-md-3 col-sm-6 column-list" *ngFor="let element of list">
-              <h2 > <mat-icon class="mr-2" aria-hidden="false" fontIcon='inbox' *ngIf="element.nombre === 'Sin Fecha asiganada'"> </mat-icon> 
-                {{element.nombre}}
+            <div class="col-lg-3 col-md-3 col-sm-6 column-list" *ngFor="let element of list; index as i">
+              <h2 > <mat-icon class="mr-2" aria-hidden="false" fontIcon='inbox' *ngIf="element.name === 'Sin Fecha asiganada'"> </mat-icon> 
+                {{element.name}}
                 <span class="activityAmount"> ({{element.activities.length}}) </span>
               </h2>
               <div
@@ -25,10 +25,10 @@
                         </div>
                           <mat-card-title-group class="card-item-title">
                             <mat-card-title>{{item.title}}</mat-card-title>
-                            <mat-card-subtitle *ngIf="item.startDate && item.endDate">{{ formatearFecha(item.startDate) +' - '+ formatearFecha(item.endDate)}}</mat-card-subtitle>
+                            <mat-card-subtitle *ngIf="item.startHour && item.endHour">{{ item.startHour +' - '+  item.endHour}}</mat-card-subtitle>
                           </mat-card-title-group>
                           <div *ngIf="item.editable" class="edit-buttons">
-                            <button mat-button (click)="onClickEditActivity(item)">  <mat-icon style="font-size: 20px" matChipAvatar class="mr-2" aria-hidden="false" fontIcon='more_vert'> </mat-icon> </button>
+                            <button mat-button (click)="onClickDeleteActivity(item.activityId)">  <mat-icon style="font-size: 20px" matChipAvatar class="mr-2" aria-hidden="false" fontIcon='delete'> </mat-icon> </button>
                             <button mat-button (click)="onClickEditActivity(item)">  <mat-icon style="font-size: 20px" matChipAvatar class="mr-2" aria-hidden="false" fontIcon='edit'> </mat-icon> </button>
                           </div>
                         </mat-card-header>
