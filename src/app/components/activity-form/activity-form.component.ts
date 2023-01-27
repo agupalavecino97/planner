@@ -1,4 +1,5 @@
 import { Component, Inject } from '@angular/core';
+import { FormControl } from '@angular/forms';
 import { MAT_DIALOG_DATA, MatDialogRef} from '@angular/material/dialog';
 import { Activity } from '../../models/Activity';
 
@@ -12,23 +13,21 @@ export class ActivityFormComponent {
   minDate: Date = new Date();
   maxDate: Date = new Date();
 
- 
+
   constructor(
     public dialogRef: MatDialogRef<ActivityFormComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any,
   ) {
-    this.minDate.setDate(data.firstDate.getDate())
-    this.maxDate.setDate(data.firstDate.getDate() + 2)
-
-  }
-
-
-  onDataChange(event: any) {
-    console.log(event)
+    this.minDate = new Date(data.firstDate.getFullYear(), data.firstDate.getMonth(), data.firstDate.getDate())
+    this.maxDate = new Date(data.firstDate.getFullYear(), data.firstDate.getMonth(), data.firstDate.getDate() + 2)
+    if (data.activity.startDate) {
+      data.activity.startDate = new FormControl(data.activity.startDate);
+      data.activity.endDate = new FormControl(data.activity.endDate);
+    }
   }
 
   onDateChange(type: number, event: any) {
-    type === 1 ? this.data.activity.startDate = event.value : this.data.activity.endDate = event.value 
+    type === 1 ? this.data.activity.startDateMoment = event.value : this.data.activity.endDateMoment = event.value 
   }
 
   onNoClick(): void {

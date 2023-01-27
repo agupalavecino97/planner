@@ -5,6 +5,7 @@ import { ActivityListComponent } from '../activityList/activity-list.component';
 import { MatDialog } from '@angular/material/dialog';
 import { ActivityFormComponent } from '../activity-form/activity-form.component';
 import { ActivityService } from '../../services/activity.service';
+
 export interface ActivityList {
   id: number;
   name: string;
@@ -77,8 +78,10 @@ export class HomeComponent {
         } else {
           index += 1
           lastDate = elem.startDate;
-          this.firstDateStored = elem.startDate;
-          firsdateStored = true;
+          if (!firsdateStored) {
+            this.firstDateStored = new Date(elem.startDate);
+            firsdateStored = true;
+          }
           this.list[index].name =  elem.startDate.getDate() + " de " + meses[elem.startDate.getMonth()]
           this.list[index].activities.push(elem);
           days -= 1;
@@ -97,7 +100,6 @@ export class HomeComponent {
         days -= 1
       }
     }
-    console.log(this.list)
   }
 
   drop(event: any) {
@@ -124,22 +126,17 @@ export class HomeComponent {
     dialogRef.afterClosed().subscribe(result => {
       if (result) {
         if (!result.activityId || result.activityId === null) {
-          if (result.startDate) {
-            result.startDate = new Date(result.startDate._d)
+          if (result.startDateMoment) {
+            result.startDate = result.startDateMoment.toDate();
+            result.endDate = result.endDateMoment.toDate();
           }
-           if (result.endDate) {
-            result.endDate = new Date(result.endDate._d)
-          }
-          console.log(result);
           let new_activity = Activity.parseItem(result);
           new_activity.activityId = new Date().getTime();
           new_activity.status = null
-          console.log(new_activity);
           if (new_activity.startDate === null ) {
             this.list[0].activities.push(new_activity)
           } else {
               let daysdiff = (new_activity.endDate!.getTime() - new_activity.startDate!.getTime()) /(1000*60*60*24) + 1;
-              console.log(daysdiff);
               let dateToCompare = new Date();
               dateToCompare.setDate(new_activity.startDate!.getDate());
               let index = 1
@@ -157,17 +154,35 @@ export class HomeComponent {
              
             }
         } else {
-          console.log('Hay quie act algo?')
-          console.log(result)
-          this.list.forEach( (elem, index) => {
-            let i = elem.activities.findIndex((el: Activity) => el.activityId === result.activityId)
-            if (i !== -1) {
-              elem.activities[i] = result;
-              elem.activities[i].editable = false;
-              this.ordenarPorFecha(index);
+          if (result.startDateMoment) {
+            result.startDate = result.startDateMoment.toDate();
+            result.endDate = result.endDateMoment.toDate();
+            result.editable = false;
+            let daysToInsert = this.getDaysToInsert(result.startDate, result.endDate);
+            let index = 0;
+            while (index < this.list.length) {
+              let i = this.list[index].activities.findIndex((el: Activity) => el.activityId === result.activityId);
+              if (i !== -1) {
+                if (daysToInsert.find((elem: string) => this.list[index].name.includes(elem))) {
+                  this.list[index].activities[i] = result;
+                  this.list[index].activities[i].editable = false;
+                  this.ordenarPorFecha(index);
+                } else {
+                  this.onClickDeleteActivityOnDay(result.activityId, index, i);
+                }
+              } else {
+                if (daysToInsert.find((elem: string) => this.list[index].name.includes(elem))) {
+                  this.list[index].activities.push(result);
+                  this.ordenarPorFecha(index);
+                }
+              }
+              index = index + 1;
             }
-          })
-         
+          } else {
+            let i = this.list[0].activities.findIndex((el: Activity) => el.activityId === result.activityId);
+            this.list[0].activities[i] = result;
+            this.list[0].activities[i].editable = false;
+          }         
         };
         this.activity = new Activity();
       }
@@ -182,6 +197,11 @@ export class HomeComponent {
       }
     })
   }
+
+  onClickDeleteActivityOnDay(id: number, index: number, i: number) { 
+      this.list[index].activities.splice(i, 1);
+  }
+
 
   ordenarPorFecha(index: number): void {
     this.list[index].activities.sort((a, b) => {
@@ -200,11 +220,19 @@ export class HomeComponent {
       this.openFormAcrtivity();
   }
 
-  // formatearFecha(date: string): string {
-  //   return date.substring(0, date.length - 3);
-  // }
+  getDaysToInsert(d1: Date, d2: Date): Array<string> {
+    let daysdiff = (d2.getTime() - d1.getTime()) /(1000*60*60*24) + 1;
+    let days = [];
+    let dateSave = new Date();
+    dateSave.setDate(d1.getDate());
+    while(daysdiff > 0) {
+      days.push(dateSave.getDate().toString())
+      let newDate = new Date();
+      newDate.setDate(dateSave.getDate() + 1);
+      dateSave = newDate;
+      daysdiff = daysdiff - 1;
+    }
+    return days;
+  }
 
-  // formatearFechaDatePicker(date: any, hour: string) {
-  //   return(date._d.getFullYear().toString() + '-' + (date._d.getMonth() + 1 < 10 ? '0' + (date._d.getMonth() + 1).toString() : (date._d.getMonth() + 1).toString()) + '-' + date._d.getDate().toString() + ' ' + hour + ':00');
-  // }
 }

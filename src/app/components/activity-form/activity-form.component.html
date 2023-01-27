@@ -1,4 +1,4 @@
-<h1 mat-dialog-title class="modal-title">  <mat-icon aria-hidden="false" fontIcon='arrow_forward_ios' (click)="onNoClick()" style="cursor: pointer"> </mat-icon>  Agregar una actividad</h1>
+<h1 mat-dialog-title class="modal-title">  <mat-icon aria-hidden="false" fontIcon='arrow_forward_ios' (click)="onNoClick()" style="cursor: pointer"> </mat-icon>  {{ !data.activity.activityId ? 'Agregar una actividad' : 'Modificar una actividad'}} </h1>
 <div mat-dialog-content>
     <mat-grid-list cols="2" rowHeight="100px">
         <mat-grid-tile [colspan]=1 [rowspan]=1>
@@ -18,19 +18,19 @@
           </mat-form-field>  
         </mat-grid-tile>
        
-        <mat-grid-tile [colspan]=1 [rowspan]=1 *ngIf="!data.activity.activityId || data.activity.activityId === null">
+        <mat-grid-tile [colspan]=1 [rowspan]=1>
           <mat-form-field appearance="outline" floatLabel="always" class="full-width" disabled> 
-              <mat-label>Fecha de inicio </mat-label>
-              <input matInput [matDatepicker]="fechaInicio" (dateChange)="onDateChange(1, $event)" [(ngModel)]="data.activity.startDate" [min]="minDate" [max]="maxDate">
-              <mat-datepicker-toggle matIconSuffix [for]="fechaInicio"></mat-datepicker-toggle>
-              <mat-datepicker #fechaInicio></mat-datepicker>
-            </mat-form-field>
+            <mat-label>Fecha de inicio </mat-label>
+            <input matInput [matDatepicker]="fechaInicio" (dateChange)="onDateChange(1, $event)" [formControl]="data.activity.startDate" [min]="minDate" [max]="maxDate">
+            <mat-datepicker-toggle matIconSuffix [for]="fechaInicio"></mat-datepicker-toggle>
+            <mat-datepicker #fechaInicio></mat-datepicker>
+          </mat-form-field>
         </mat-grid-tile>
-        <mat-grid-tile [colspan]=1 [rowspan]=1 *ngIf="!data.activity.activityId || data.activity.activityId === null">
-          <mat-form-field appearance="outline" floatLabel="always" class="full-width" [(ngModel)]="data.activity.endDate" disabled>
+        <mat-grid-tile [colspan]=1 [rowspan]=1>
+          <mat-form-field appearance="outline" floatLabel="always" class="full-width"  disabled>
               <mat-label>Fecha de Fin </mat-label>
-              <input matInput [matDatepicker]="fechaFin" (dateChange)="onDateChange(2, $event)" [min]="minDate" [max]="maxDate">
-              <mat-datepicker-toggle matIconSuffix [for]="fechaFin"></mat-datepicker-toggle>
+              <input matInput [matDatepicker]="fechaFin" (dateChange)="onDateChange(2, $event)" [formControl]="data.activity.endDate" [min]="minDate" [max]="maxDate" [disabled]="data.activity.startDateMoment === null || !data.activity.startDateMoment">
+              <mat-datepicker-toggle matIconSuffix [for]="fechaFin" [disabled]="data.activity.startDateMoment === null || !data.activity.startDateMoment"></mat-datepicker-toggle>
               <mat-datepicker #fechaFin></mat-datepicker>
             </mat-form-field>
       </mat-grid-tile>
@@ -44,7 +44,7 @@
     <mat-grid-tile [colspan]=1 [rowspan]=1>
           <mat-form-field appearance="outline" class="full-width">
             <mat-label>Hora de fin</mat-label>
-            <input matInput type="time" [(ngModel)]="data.activity.endHour">
+            <input matInput type="time" [(ngModel)]="data.activity.endHour" [disabled]="!data.activity.startHour">
           </mat-form-field>
     </mat-grid-tile>
     <mat-grid-tile [colspan]=1 [rowspan]=1 *ngIf="data.activity.activityId && data.activity.activityId !== null">
@@ -61,5 +61,5 @@
 </div>
 <div mat-dialog-actions class="buttons">
   <button mat-button (click)="onNoClick()" class="btn-cancelar">Cancelar</button>
-  <button mat-button [mat-dialog-close]="data.activity" cdkFocusInitial class="btn-agregar" [disabled]="data.activity.title === '' || data.activity.startDate === null || data.activity.endDate === null">Agregar</button>
+  <button mat-button [mat-dialog-close]="data.activity" cdkFocusInitial class="btn-agregar" [disabled]="!data.activity.title || data.activity.title === null || data.activity.title === '' || (data.activity.startDateMoment !== null && !data.activity.endDateMoment)" style="cursor: pointer"> {{!data.activity.activityId ? 'Agregar' : 'Guardar'}} </button>
 </div>
