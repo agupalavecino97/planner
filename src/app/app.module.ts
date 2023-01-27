@@ -12,6 +12,8 @@ import { HomeComponent } from './components/home/home.component';
 import { SidenavComponent } from './components/sidenav/sidenav.component';
 import { ActivityListComponent } from './components/activityList/activity-list.component'
 // import { ActivityComponent } from './components/activity/activity.component'
+// services
+import { ActivityService } from './services/activity.service'
 // material
 import {MatSidenavModule} from '@angular/material/sidenav';
 import {MatButtonModule} from '@angular/material/button';
@@ -69,10 +71,7 @@ import { MY_DATE_FORMATS } from './date-format';
     MomentDateModule,
     MatButtonToggleModule
   ],
-  exports: [
-    ActivityListComponent
-  ],
-  providers: [MatDatepickerModule, MatNativeDateModule, { provide: MAT_DATE_FORMATS, useValue: MY_DATE_FORMATS }],
+  providers: [ActivityService, MatDatepickerModule, MatNativeDateModule, { provide: MAT_DATE_FORMATS, useValue: MY_DATE_FORMATS }],
   bootstrap: [AppComponent],
   schemas: [ CUSTOM_ELEMENTS_SCHEMA ]
 })

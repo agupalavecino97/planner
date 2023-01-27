@@ -1,14 +1,16 @@
-import { Component, EventEmitter, Output } from '@angular/core';
+import { Component, } from '@angular/core';
+import { ActivityService } from '../../services/activity.service';
 
 @Component({
   selector: 'app-header',
   templateUrl: './header.component.html',
-  styleUrls: ['./header.component.scss']
+  styleUrls: ['./header.component.scss'],
 })
 export class HeaderComponent {
-  @Output() onEmitAgregar: EventEmitter<any> = new EventEmitter<any>();
+ 
+  constructor(private activityService: ActivityService) {}
 
   onClickNuevaActividad() {
-    this.onEmitAgregar.emit()
+    this.activityService.onEmit();
   }
 }
