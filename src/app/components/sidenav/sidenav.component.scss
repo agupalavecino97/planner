@@ -16,3 +16,24 @@
     color: #F2F2F2;
   }
 }
+
+.brand-container-mobile {
+  display: none;
+}
+@media (max-width: 480px) {
+  .sidenav {
+    display: none;
+    // width: 10%;
+  }
+  .brand-container {
+    display: none;
+  }
+  .brand-container-mobile {
+    display: block;
+    padding: 2em .8em;
+  }
+  .brand-container-mobile span {
+    font-size: 2em;
+    color: #F2F2F2;
+  }
+}

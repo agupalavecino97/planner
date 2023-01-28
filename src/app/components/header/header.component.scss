@@ -5,21 +5,10 @@
         display: flex;
         align-items: start;
         padding: 40px 40px;
-        // @media(max-width: 767px){
-        //     padding: 20px 5px 5px;
-        // }
-        // @include telefono{
-        //     padding: 10px 5px 5px;
-        // }
         .title{
             padding-top: 5px;
             width: 100%;
             flex: 1 0;
-            // @include telefono{
-            //     .btn-sm{
-            //         padding: 0.2rem 0.3rem;
-            //     }
-            // }
         }
         button {
             background-color: #2E56A6;
@@ -27,4 +16,40 @@
             margin-right: 8em;
         }
     }
+    @media (max-width: 480px) {
+        .title-container{
+            padding: 1em;
+            .title{
+                padding-top: 0px;
+            }
+            button {
+                margin-right: 0em;
+                span {
+                    display: none;
+                }
+                mat-icon {
+                    margin-left: 6px;
+                }
+            }
+        }
+    }
+    
+}
+
+.header-mobile{
+    display: none;
+    background-color: #2E56A6;
+    height: 55px;
+    .title-container-mobile{
+        padding: 1em;
+        .title-mobile {
+            padding-top: 0px;
+            font-size: 2em;
+            color: #F2F2F2;
+        }
+    }
+    @media (max-width: 480px) {
+        display: block;
+    }
+    
 }

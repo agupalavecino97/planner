@@ -1,7 +1,7 @@
 <div class="col-sm-12">
   <div class="row column-list-container" cdkDropListGroup>
     <div
-      class="col-lg-3 col-md-3 col-sm-6 column-list"
+      class="column-list"
       *ngFor="let element of list; index as i"
     >
       <h2>
@@ -26,7 +26,7 @@
             (click)="item.editable = !item.editable"
             [ngStyle]="{ cursor: item.editable ? 'pointer' : 'move' }"
           >
-            <mat-card-header>
+            <mat-card-header class="card-header-mobile">
               <div
                 class="icon"
                 [ngStyle]="{
@@ -116,7 +116,7 @@
             </mat-card-content>
           </mat-card>
         </div>
-        <div class="list-box" *ngIf="element.activities.length === 0" cdkDrag>
+        <div class="list-box" *ngIf="element.activities.length === 0" cdkDrag [cdkDragDisabled]="true">
           <mat-card class="card-item">
             <mat-card-header>
               <mat-card-title-group class="card-item-title">

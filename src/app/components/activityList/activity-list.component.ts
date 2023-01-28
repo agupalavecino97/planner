@@ -146,7 +146,7 @@ export class ActivityListComponent implements OnInit {
   openFormAcrtivity(): void {
     const dialogRef = this.dialog.open(ActivityFormComponent, {
       data: { activity: this.activity, firstDate: this.firstDateStored },
-      width: '40%',
+      width: '50em',
       height: '100%',
       position: { right: '0' },
     });

@@ -124,3 +124,66 @@
     color: #2e56a6;
   }
 }
+
+
+@media (max-width: 480px) {
+  .column-list-container {
+    padding: 5px;
+    width: 29em;
+  }
+  .column-list {
+    width: 14em;
+    margin: 2px;
+    h2 {
+      font-size: 1.2em;
+      align-items: flex-start;
+      line-height: 20px;
+      height: 30px;
+      .mat-icon {
+        margin-top: 10px;
+        margin-right: 10px;
+      }
+    }
+  }
+  .list-box {
+    padding: 0;
+  }
+  .card-item {
+    width: 13em;
+    margin-bottom: 10px;
+  }
+  
+  .card-item-title {
+    margin-left: 1em;
+    margin-top: 0.4em;
+  }
+  
+  .icon {
+    width: .8rem;
+    height: .8rem;
+  }
+
+  .mat-icon {
+    overflow: inherit;
+  }
+
+  .card-header-mobile {
+    padding: 8px 4px;
+    display: flex;
+    align-items: center;
+  }
+
+  mat-card-title {
+    font-size: 1.2em;
+    line-height: 22px;
+  }
+
+  .progressChip {
+    margin-left: 0;
+  }
+  
+  .doneChip {
+    margin-left: 0;
+  }
+
+}
