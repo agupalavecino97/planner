@@ -20,7 +20,7 @@
         floatLabel="always"
         class="full-width"
       >
-        <mat-label>Nombre de la Actividad</mat-label>
+        <mat-label>Nombre de la Actividad *</mat-label>
         <input
           matInput
           placeholder="Buscá una actividad o crea una nueva..."
@@ -32,7 +32,7 @@
     </div>
     <div  >
       <mat-form-field appearance="outline" class="full-width">
-        <mat-label>Tipo</mat-label>
+        <mat-label>Tipo *</mat-label>
         <mat-select [(ngModel)]="data.activity.type">
           <mat-option value="ACTIVITY">Actividad</mat-option>
           <mat-option value="PARTY">Fiesta</mat-option>
@@ -99,7 +99,11 @@
     <div  >
       <mat-form-field appearance="outline" class="full-width">
         <mat-label>Hora de inicio </mat-label>
-        <input matInput type="time" [(ngModel)]="data.activity.startHour" />
+        <input matInput type="time" [(ngModel)]="data.activity.startHour" 
+            [disabled]="
+              data.activity.startDateMoment === null ||
+              !data.activity.startDateMoment
+        "/>
       </mat-form-field>
     </div>
     <div  >
@@ -138,7 +142,9 @@
       !data.activity.title ||
       data.activity.title === null ||
       data.activity.title === '' ||
-      (data.activity.startDateMoment !== null && !data.activity.endDateMoment)
+      !data.activity.type ||
+      data.activity.type === null ||
+      ((data.activity.startDateMoment && data.activity.startDateMoment !== null) && !data.activity.endDateMoment)
     "
     style="cursor: pointer"
   >
