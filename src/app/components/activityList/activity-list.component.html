@@ -4,7 +4,8 @@
       <mat-spinner ></mat-spinner>
       <span> Cargando datos ...  <br/> Puede tomar unos minutos ya que se usa servicios gratuitos</span>
     </div>
-    <div
+    <div *ngIf="!loading">
+      <div
       class="column-list"
       *ngFor="let element of list; index as i"
     >
@@ -134,5 +135,7 @@
         + Nueva
       </button>
     </div>
+    </div>
+   
   </div>
 </div>
