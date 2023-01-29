@@ -32,6 +32,7 @@ import {MatGridListModule} from '@angular/material/grid-list';
 import {MatSelectModule} from '@angular/material/select';
 import { MomentDateModule } from '@angular/material-moment-adapter';
 import {MatButtonToggleModule} from '@angular/material/button-toggle';
+import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 
 
 import { MAT_DATE_FORMATS } from '@angular/material/core';
@@ -69,7 +70,8 @@ import { MY_DATE_FORMATS } from './date-format';
     MatGridListModule,
     MatSelectModule,
     MomentDateModule,
-    MatButtonToggleModule
+    MatButtonToggleModule,
+    MatProgressSpinnerModule,
   ],
   providers: [ActivityService, MatDatepickerModule, MatNativeDateModule, { provide: MAT_DATE_FORMATS, useValue: MY_DATE_FORMATS }],
   bootstrap: [AppComponent],

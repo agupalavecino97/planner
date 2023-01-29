@@ -1,5 +1,9 @@
 <div class="col-sm-12">
   <div class="row column-list-container" cdkDropListGroup>
+    <div class="loading" *ngIf="loading">
+      <mat-spinner ></mat-spinner>
+      <span> Cargando datos ...  <br/> Puede tomar unos minutos ya que se usa servicios gratuitos</span>
+    </div>
     <div
       class="column-list"
       *ngFor="let element of list; index as i"

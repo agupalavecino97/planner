@@ -58,6 +58,7 @@ export class ActivityListComponent implements OnInit {
   ];
   public firstDateStored: Date = new Date();
   public activity: Activity | undefined;
+  public loading: boolean = false;
 
   constructor(
     public dialog: MatDialog,
@@ -67,8 +68,14 @@ export class ActivityListComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.activityService.getActivities().subscribe((res: Array<any>) => {
-      this.armarListado(Activity.parseArray(res));
+    this.loading = false;
+    this.activityService.getActivities().subscribe((res: any) => {
+      if (!res.error) {
+        this.armarListado(Activity.parseArray(res));
+        this.loading = false;
+      } else {
+        console.log("error: ", res.error);
+      }
     });
     this.activityService.emitAgregarProducto$.subscribe((res) => {
       if (res) {
@@ -144,6 +151,9 @@ export class ActivityListComponent implements OnInit {
   }
 
   openFormAcrtivity(): void {
+    if (this.loading) {
+      return;
+    }
     const dialogRef = this.dialog.open(ActivityFormComponent, {
       data: { activity: this.activity, firstDate: this.firstDateStored },
       width: '50em',

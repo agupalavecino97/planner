@@ -125,6 +125,22 @@
   }
 }
 
+.loading {
+  display: flex;
+	flex-direction: column;
+	flex-wrap: wrap;
+	justify-content: center;
+	align-items: center;
+	align-content: center;
+  position: absolute;
+  top: 20%;
+  left: 45%;  
+  span {
+    font-weight: 200;
+    font-variant: small-caps;
+  }
+
+}
 
 @media (max-width: 480px) {
   .column-list-container {
