@@ -68,7 +68,7 @@ export class ActivityListComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.loading = false;
+    this.loading = true;
     this.activityService.getActivities().subscribe((res: any) => {
       if (!res.error) {
         this.armarListado(Activity.parseArray(res));
